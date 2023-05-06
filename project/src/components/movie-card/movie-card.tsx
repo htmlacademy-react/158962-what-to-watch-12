@@ -4,13 +4,18 @@ import {AppRoute} from '../../const';
 
 interface MovieCardProps {
   movie: IMovie;
+  onActiveCardId?: (id: number | null) => void;
 }
 
-const MovieCard = ({movie}: MovieCardProps):JSX.Element => {
+const MovieCard = ({movie, onActiveCardId}: MovieCardProps):JSX.Element => {
   const { name, previewImage, id } = movie;
   return (
     <article className="small-film-card catalog__films-card">
-      <Link to={generatePath(AppRoute.Film, { id: `${id}`})} className="small-film-card__link">
+      <Link to={generatePath(AppRoute.Film, { id: `${id}`})}
+            className="small-film-card__link"
+            onMouseOver={() => onActiveCardId?.(id)}
+            onMouseLeave={() => onActiveCardId?.(null)}
+      >
         <div className="small-film-card__image">
           <img src={previewImage}
             alt={name}

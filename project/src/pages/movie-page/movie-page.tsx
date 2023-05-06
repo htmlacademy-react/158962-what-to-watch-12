@@ -26,6 +26,8 @@ const MoviePage = ({movie, reviews}: MoviePageProps):JSX.Element => {
   const {name, backgroundImage, genre, released, posterImage, id} = movie;
   const location = useLocation();
 
+  const sameGenreMovies = movies.filter((item) => item.genre === genre);
+
   const renderTab = () => {
     switch (location.hash) {
       case MovieTabsHashes.Overview:
@@ -87,7 +89,7 @@ const MoviePage = ({movie, reviews}: MoviePageProps):JSX.Element => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList movies={movies} filmsAmount={filmsAmountMoviePage} />
+          <MovieList movies={sameGenreMovies} filmsAmount={filmsAmountMoviePage} />
         </section>
         <Footer />
       </div>

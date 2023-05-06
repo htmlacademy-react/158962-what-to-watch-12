@@ -12,9 +12,9 @@ const MovieCard = ({movie, onActiveCardId}: MovieCardProps):JSX.Element => {
   return (
     <article className="small-film-card catalog__films-card">
       <Link to={generatePath(AppRoute.Film, { id: `${id}`})}
-            className="small-film-card__link"
-            onMouseOver={() => onActiveCardId?.(id)}
-            onMouseLeave={() => onActiveCardId?.(null)}
+        className="small-film-card__link"
+        onMouseOver={() => onActiveCardId?.(id)}
+        onMouseLeave={() => onActiveCardId?.(null)}
       >
         <div className="small-film-card__image">
           <img src={previewImage}

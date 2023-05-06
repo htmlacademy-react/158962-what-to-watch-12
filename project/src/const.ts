@@ -1,6 +1,7 @@
 export const filmsAmountMain = 8;
 export const filmsAmountMyList = 9;
 export const filmsAmountMoviePage = 4;
+export const HOUR = 60;
 export const GENRES_LIST = ['All genres', 'Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'];
 
 export enum AppRoute {
@@ -42,3 +43,13 @@ export const RATING = {
   AWESOME: {min: 10, value: 'Awesome'}
 };
 
+export enum PlayerButtons {
+  Pause = '#pause',
+  Play = '#play-s',
+  FullScreen = '#full-screen',
+}
+
+export enum TimeInSeconds {
+  Hour = 3600,
+  Minute = 60
+}

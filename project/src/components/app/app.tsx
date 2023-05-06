@@ -23,7 +23,7 @@ const App = ({movies, comments, promoMovie}: AppProps): JSX.Element => (
       <Route path={AppRoute.Root} element={<Main promoMovie={promoMovie} movies={movies} />} />
       <Route path={AppRoute.Login} element={<Login />} />
       <Route path={AppRoute.Film} element={<MoviePage movie={movies[1]} reviews={comments} />} />
-      <Route path={AppRoute.Player} element={<Player />} />
+      <Route path={AppRoute.Player} element={<Player movies={movies} />} />
       <Route path={AppRoute.MyList} element={
         <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
           <MyList movies={movies} />

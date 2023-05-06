@@ -1,11 +1,16 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
-import { RATING } from '../const';
+import { RATING, TimeInSeconds, HOUR } from '../const';
 dayjs.extend(duration);
 
 export const releasedYear = (date: number): string => dayjs(date).format('YYYY');
 export const reviewDate = (date: string): string => dayjs(date).format('MMMM DD, YYYY');
-export const movieDuration = (date: number): string => dayjs.duration(date, 'minutes').format('H[h] mm[m]');
+export const movieDuration = (date: number): string => {
+  if (date < HOUR) {
+    return dayjs.duration(date, 'minutes').format('mm[m]');
+  }
+  return dayjs.duration(date, 'minutes').format('H[h] mm[m]');
+};
 export const isEven = (i: number): boolean => i % 2 === 0;
 
 
@@ -20,3 +25,33 @@ export const getRatingDescription = (rating: number): string => {
     return RATING.VERY_GOOD.value;
   } return RATING.AWESOME.value;
 };
+
+export const getVideoDuration = (date: number | null): string | undefined => {
+  if (!date) {
+    date = 0;
+  }
+
+  let hours = 0;
+  let minutes = 0;
+  let seconds = 0;
+  let filmDuration = '';
+
+  switch (true) {
+    case (date >= TimeInSeconds.Hour):
+      hours = Math.trunc(date / TimeInSeconds.Hour);
+      minutes = Math.trunc((date - hours * TimeInSeconds.Hour) / TimeInSeconds.Minute);
+      seconds = date - (minutes * TimeInSeconds.Minute) - (hours * TimeInSeconds.Hour);
+
+      filmDuration = dayjs.duration({ seconds, minutes, hours }).format('HH:mm:ss');
+      break;
+    case (date < TimeInSeconds.Hour):
+      minutes = Math.trunc(date / TimeInSeconds.Minute);
+      seconds = date - (minutes * TimeInSeconds.Minute) - (hours * TimeInSeconds.Hour);
+
+      filmDuration = dayjs.duration({ seconds, minutes }).format('mm:ss');
+      break;
+  }
+
+  return filmDuration;
+};
+

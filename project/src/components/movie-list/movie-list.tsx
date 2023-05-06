@@ -16,7 +16,7 @@ const MovieList = ({filmsAmount, movies}: FilmsListProps):JSX.Element => {
         movies.slice(0, filmsAmount).map((movie) => <MovieCard key={movie.id} movie={movie} onActiveCardId={setActiveCardId} />)
       }
     </div>
-  )
+  );
 };
 
 export default MovieList;

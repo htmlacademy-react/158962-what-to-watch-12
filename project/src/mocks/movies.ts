@@ -44,7 +44,7 @@ export const movies: IMovie[] = [
       'Judi Law',
     ],
     runTime: 50,
-    genre: 'Comedy',
+    genre: 'Horror',
     released: 2020,
     isFavorite: false
   },
@@ -67,7 +67,7 @@ export const movies: IMovie[] = [
       'Bill Murray',
     ],
     runTime: 99,
-    genre: 'Comedy',
+    genre: 'Fantasy',
     released: 2020,
     isFavorite: false
   },
@@ -88,7 +88,7 @@ export const movies: IMovie[] = [
       'Bill Murray'
     ],
     runTime: 99,
-    genre: 'Comedy',
+    genre: 'Fantasy',
     released: 2015,
     isFavorite: true
   },
@@ -130,7 +130,7 @@ export const movies: IMovie[] = [
       'Bill Murray'
     ],
     runTime: 99,
-    genre: 'Comedy',
+    genre: 'Horror',
     released: 2017,
     isFavorite: false
   },
@@ -151,7 +151,7 @@ export const movies: IMovie[] = [
       'Bill Murray'
     ],
     runTime: 99,
-    genre: 'Comedy',
+    genre: 'History',
     released: 2018,
     isFavorite: false
   },
@@ -214,7 +214,7 @@ export const movies: IMovie[] = [
       'Bill Murray'
     ],
     runTime: 99,
-    genre: 'Comedy',
+    genre: 'Horror',
     released: 2018,
     isFavorite: false
   },
@@ -258,7 +258,7 @@ export const movies: IMovie[] = [
       'Judi Law',
     ],
     runTime: 99,
-    genre: 'Comedy',
+    genre: 'Horror',
     released: 2013,
     isFavorite: false
   },

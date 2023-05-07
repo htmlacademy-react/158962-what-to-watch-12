@@ -1,4 +1,4 @@
-import { IMovie } from '../types/Movie';
+import { IMovie } from '../types/movie';
 
 export const promoMovie: IMovie = {
   id: 7,

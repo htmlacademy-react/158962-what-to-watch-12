@@ -3,30 +3,57 @@ import MovieList from '../../components/movie-list/movie-list';
 import {filmsAmountMoviePage, MovieTabsHashes} from '../../const';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
-import {movies} from '../../mocks/movies';
-import {IMovie} from '../../types/Movie';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
 import MoviePageTabs from '../../components/movie-page-tabs/movie-page-tabs';
 import {useLocation} from 'react-router-dom';
 import MoviePageTabOverview from '../../components/movie-page-tab-overview/movie-page-tab-overview';
 import MoviePageTabDetail from '../../components/movie-page-tab-details/movie-page-tab-details';
 import MoviePageTabReviews from '../../components/movie-page-tab-reviews/movie-page-tab-reviews';
-import {IReview} from '../../types/Review';
 import PlayButton from '../../components/play-button/play-button';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import MovieButtons from '../../components/movie-buttons/movie-buttons';
 import AddReviewButton from '../../components/add-review-button/add-review-button';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Spinner from '../../components/spinner/spinner';
+import Error from '../../components/error/error';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import {selectSingleStatus, selectSingleFilm, fetchSingleFilm} from '../../store/slices/single-film-slice/single-film-slice';
+import {selectSimilarFilms, fetchSimilarFilms} from '../../store/slices/similar-films-slice/similar-films-slice';
+import {fetchComments, selectSortedComments} from '../../store/slices/comments-slice/comments-slice';
 
-interface MoviePageProps {
-  movie: IMovie;
-  reviews: IReview[];
-}
-
-const MoviePage = ({movie, reviews}: MoviePageProps):JSX.Element => {
-  const {name, backgroundImage, genre, released, posterImage, id} = movie;
+const MoviePage = ():JSX.Element => {
+  const dispatch = useAppDispatch();
+  const movieId = Number(useParams().id);
   const location = useLocation();
 
-  const sameGenreMovies = movies.filter((item) => item.genre === genre);
+  useEffect(() => {
+    dispatch(fetchSingleFilm(movieId));
+    dispatch(fetchSimilarFilms(movieId))
+    dispatch(fetchComments(movieId))
+  }, [movieId, dispatch]);
+
+  const status = useAppSelector(selectSingleStatus);
+  const movie = useAppSelector(selectSingleFilm);
+  const similarMovies = useAppSelector(selectSimilarFilms);
+
+  const sortedComments = useAppSelector(selectSortedComments);
+  console.log(sortedComments)
+
+  if (status.isError) {
+    return (
+      <Error />
+    );
+  }
+
+  if (movie === null || status.isLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
+  const {name, backgroundImage, genre, released, posterImage, id} = movie;
+
 
   const renderTab = () => {
     switch (location.hash) {
@@ -37,7 +64,7 @@ const MoviePage = ({movie, reviews}: MoviePageProps):JSX.Element => {
         return <MoviePageTabDetail movie={movie} /> ;
 
       case MovieTabsHashes.Reviews:
-        return <MoviePageTabReviews reviews={reviews} /> ;
+        return <MoviePageTabReviews reviews={sortedComments} /> ;
 
       default:
         return '';
@@ -89,7 +116,7 @@ const MoviePage = ({movie, reviews}: MoviePageProps):JSX.Element => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList movies={sameGenreMovies} filmsAmount={filmsAmountMoviePage} />
+          <MovieList movies={similarMovies} filmsAmount={filmsAmountMoviePage} />
         </section>
         <Footer />
       </div>

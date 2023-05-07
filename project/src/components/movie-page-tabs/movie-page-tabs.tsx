@@ -1,6 +1,6 @@
 import {MOVIE_TABS, AppRoute} from '../../const';
 import { Link, generatePath, useLocation } from 'react-router-dom';
-import { IMovie } from '../../types/Movie';
+import { IMovie } from '../../types/movie';
 import cn from 'classnames';
 
 interface MoviePageTabs {

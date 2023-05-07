@@ -1,5 +1,5 @@
 import MovieCard from '../movie-card/movie-card';
-import {IMovie} from '../../types/Movie';
+import {IMovie} from '../../types/movie';
 import {useState} from 'react';
 
 interface FilmsListProps {

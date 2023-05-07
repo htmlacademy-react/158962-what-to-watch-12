@@ -1,4 +1,4 @@
-import { IReview } from '../types/Review';
+import { IReview } from '../types/review';
 
 export const comments: IReview[] = [
   {

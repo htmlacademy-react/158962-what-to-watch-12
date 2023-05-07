@@ -1,4 +1,4 @@
-import { IMovie } from '../../types/Movie';
+import { IMovie } from '../../types/movie';
 import { generatePath, Link } from 'react-router-dom';
 import {AppRoute} from '../../const';
 import VideoPreload from '../video-preload/video-preload';

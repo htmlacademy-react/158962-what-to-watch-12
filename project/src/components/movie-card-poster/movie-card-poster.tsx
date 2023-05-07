@@ -2,8 +2,8 @@ import cn from 'classnames';
 
 interface MovieCardPosterProps {
   className?: string;
-  photoUrl: string;
-  name: string;
+  photoUrl?: string;
+  name?: string;
 }
 
 const MovieCardPoster = ({className, photoUrl, name}: MovieCardPosterProps):JSX.Element => (

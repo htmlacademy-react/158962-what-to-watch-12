@@ -1,4 +1,4 @@
-import {IMovie} from '../../types/Movie';
+import {IMovie} from '../../types/movie';
 import { movieDuration } from '../../utils/utils';
 
 interface MoviePageTabDetailProps {

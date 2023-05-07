@@ -3,7 +3,7 @@ import { filmsAmountMyList } from '../../const';
 import MovieList from '../../components/movie-list/movie-list';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
-import {IMovie} from '../../types/Movie';
+import {IMovie} from '../../types/movie';
 
 interface MyListProps {
   movies: IMovie[];

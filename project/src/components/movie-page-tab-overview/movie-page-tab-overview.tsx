@@ -1,4 +1,4 @@
-import {IMovie} from '../../types/Movie';
+import {IMovie} from '../../types/movie';
 import {getRatingDescription} from '../../utils/utils';
 
 interface MoviePageTabOverviewProps {

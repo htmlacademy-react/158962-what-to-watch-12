@@ -1,25 +1,22 @@
 import {useRef, useState} from 'react';
-import {IMovie} from '../../types/Movie';
 import {useNavigate, useParams} from 'react-router-dom';
 import {PlayerButtons} from '../../const';
 import {getVideoDuration} from '../../utils/utils';
+import {useAppSelector} from '../../hooks';
+import {selectFilms} from '../../store/slices/films-slice/films-slice';
 
-interface PlayerProps {
-  movies: IMovie[];
-}
 
-const Player = ({movies}: PlayerProps):JSX.Element => {
+const Player = ():JSX.Element => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const progressRef = useRef<HTMLProgressElement | null>(null);
   const togglerRef = useRef<HTMLDivElement | null>(null);
   const [currentButton, setCurrentButton] = useState(PlayerButtons.Pause);
+  const movies = useAppSelector(selectFilms)
   const [timeCount, setTimeCount] = useState<number | null>(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
   const currentMovie = movies.find((movie) => movie.id.toString() === id);
-  console.log(videoRef.current);
-
 
   const handlePlayAndPauseButtonClick = () => {
     if (!videoRef.current) {

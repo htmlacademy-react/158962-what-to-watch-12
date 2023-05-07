@@ -1,4 +1,4 @@
-import {IReview} from '../../types/Review';
+import {IReview} from '../../types/review';
 import ReviewCard from '../review-card/review-card';
 import { isEven } from '../../utils/utils';
 

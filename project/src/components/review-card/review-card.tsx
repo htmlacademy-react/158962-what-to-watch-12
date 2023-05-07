@@ -1,4 +1,4 @@
-import { IReview } from '../../types/Review';
+import { IReview } from '../../types/review';
 import { reviewDate } from '../../utils/utils';
 
 interface ReviewCardProps {

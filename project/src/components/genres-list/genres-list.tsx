@@ -14,14 +14,12 @@ const GenresList = ({currentGenre, genresList}: GenresListProps):JSX.Element => 
 
   return (
     <ul className="catalog__genres-list">
-      {
-        [DEFAULT, ...genresList].map((name) => (
+      {[DEFAULT, ...genresList].map((name) => (
           <li key={name} className={cn('catalog__genres-item', currentGenre === name && 'catalog__genres-item--active')}>
             <Link to="/#"
                   onClick={(evt) => {
                     evt.preventDefault();
-                    dispatch(changeGenre(name))
-                  }}
+                    dispatch(changeGenre(name))}}
                   className="catalog__genres-link">{name}
             </Link>
           </li>

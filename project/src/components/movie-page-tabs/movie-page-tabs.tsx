@@ -14,15 +14,13 @@ const MoviePageTabs = ({movie}: MoviePageTabs): JSX.Element => {
   return (
     <nav className="film-nav film-card__nav">
       <ul className="film-nav__list">
-        {
-          MOVIE_TABS.map(({name, hash}) => (
+        {MOVIE_TABS.map(({name, hash}) => (
             <li key={name}
               className={cn('film-nav__item', {'film-nav__item--active': location.hash === hash})}
             >
               <Link to={generatePath(AppRoute.Tabs, {id: id.toString(), tabhash: hash})} className="film-nav__link">{name}</Link>
             </li>
-          ))
-        }
+          ))}
       </ul>
     </nav>
   );

@@ -17,7 +17,7 @@ import {useEffect, useState} from 'react';
 import UserBlock from '../../components/user-block/user-block';
 
 const Main = (): JSX.Element => {
-  const remainFilmsAmount = useAppSelector(selectRemainFilmsAmount)
+  const remainFilmsAmount = useAppSelector(selectRemainFilmsAmount);
   const movies = useAppSelector(selectFilms);
   const status = useAppSelector(selectFilmsStatus);
   const promoFilmStatus = useAppSelector(selectPromoStatus);
@@ -31,7 +31,7 @@ const Main = (): JSX.Element => {
   const [remainFilmsCount, setRemainFilmsCount] = useState(remainFilmsAmount);
 
   useEffect(() => {
-    setRemainFilmsCount(remainFilmsAmount)
+    setRemainFilmsCount(remainFilmsAmount);
   }, [remainFilmsAmount]);
 
   useEffect(() => {
@@ -40,9 +40,9 @@ const Main = (): JSX.Element => {
 
 
   const onButtonShowMoreClick = () => {
-    setMaxToShow(prev => prev + MAX_STEP);
-    setRemainFilmsCount(prev => prev - maxAmountToShow)
-  }
+    setMaxToShow((prev) => prev + MAX_STEP);
+    setRemainFilmsCount((prev) => prev - maxAmountToShow);
+  };
 
   if (status.isError || promoFilmStatus.isError) {
     return <FullPageError />;

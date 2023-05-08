@@ -29,8 +29,8 @@ const MoviePage = ():JSX.Element => {
 
   useEffect(() => {
     dispatch(fetchSingleFilm(movieId));
-    dispatch(fetchSimilarFilms(movieId))
-    dispatch(fetchComments(movieId))
+    dispatch(fetchSimilarFilms(movieId));
+    dispatch(fetchComments(movieId));
   }, [movieId, dispatch]);
 
   const status = useAppSelector(selectSingleStatus);
@@ -115,7 +115,7 @@ const MoviePage = ():JSX.Element => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList movies={similarMovies} filmsAmount={filmsAmountMoviePage} />
+          <MovieList movies={similarMovies} />
         </section>
         <Footer />
       </div>

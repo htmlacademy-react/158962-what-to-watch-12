@@ -1,4 +1,4 @@
-import {ChangeEvent, useRef, useState} from 'react';
+import { useRef, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {PlayerButtons} from '../../const';
 import {getVideoDuration} from '../../utils/utils';
@@ -11,7 +11,7 @@ const Player = ():JSX.Element => {
   const progressRef = useRef<HTMLProgressElement | null>(null);
   const togglerRef = useRef<HTMLDivElement | null>(null);
   const [currentButton, setCurrentButton] = useState(PlayerButtons.Pause);
-  const movies = useAppSelector(selectFilms)
+  const movies = useAppSelector(selectFilms);
   const [timeCount, setTimeCount] = useState<number | null>(null);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -80,9 +80,10 @@ const Player = ():JSX.Element => {
           <div className="player__time">
             <progress ref={progressRef} className="player__progress" value="0" max="100"></progress>
             <div ref={togglerRef}
-                 draggable="true"
-                 className="player__toggler"
-                 style={{left: '0%'}}>
+              draggable="true"
+              className="player__toggler"
+              style={{left: '0%'}}
+            >
               Toggler
             </div>
           </div>

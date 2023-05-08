@@ -38,8 +38,9 @@ const AddReview = ():JSX.Element => {
         </Header>
 
         <MovieCardPoster className="film-card__poster--small"
-                         photoUrl={currentMovie?.posterImage}
-                         name={currentMovie?.name} />
+          photoUrl={currentMovie?.posterImage}
+          name={currentMovie?.name}
+        />
 
       </div>
 

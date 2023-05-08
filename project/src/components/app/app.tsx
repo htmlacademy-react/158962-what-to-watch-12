@@ -1,5 +1,5 @@
 import Main from '../../pages/main/main';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus} from '../../const';
@@ -8,11 +8,9 @@ import MyList from '../../pages/my-list/my-list';
 import AddReview from '../../pages/add-review/add-review';
 import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
-import { IReview } from '../../types/review';
 import { IMovie } from '../../types/movie';
 
 interface AppProps {
-  comments: IReview[];
   movies: IMovie[];
 }
 

@@ -2,10 +2,10 @@
 //import { useAppDispatch } from '../../hooks';
 import styles from './page-error.module.css';
 
-const FullPageError = ():JSX.Element => {
-  //const dispatch = useAppDispatch();
+const FullPageError = ():JSX.Element =>
+//const dispatch = useAppDispatch();
 
-  return (
+  (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <p className={styles.errorText}>Ups, something went wrong and we cannot get offers</p>
@@ -19,6 +19,4 @@ const FullPageError = ():JSX.Element => {
 
     </div>
   );
-};
-
 export default FullPageError;

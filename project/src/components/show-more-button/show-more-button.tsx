@@ -1,19 +1,13 @@
-import {selectFilms, showMoreFilms} from '../../store/slices/films-slice/films-slice';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {IMovie} from '../../types/movie';
+interface ShoMoreButtonProps {
+  onButtonShowMoreClick: () => void;
+}
 
-
-const ShowMoreButton = ():JSX.Element => {
-  const dispatch = useAppDispatch();
-
-  const handleButtonClick = () => {
-    dispatch(showMoreFilms())
-  }
+const ShowMoreButton = ({onButtonShowMoreClick}: ShoMoreButtonProps):JSX.Element => {
 
   return (
     <div className="catalog__more">
       <button className="catalog__button"
-              onClick={handleButtonClick}
+              onClick={onButtonShowMoreClick}
               type="button">Show more</button>
     </div>
   )

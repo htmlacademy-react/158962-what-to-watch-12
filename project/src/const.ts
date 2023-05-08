@@ -2,6 +2,7 @@ export const filmsAmountMain = 8;
 export const filmsAmountMyList = 9;
 export const filmsAmountMoviePage = 4;
 export const HOUR = 60;
+export const MAX_STEP = 8;
 export const GENRES_LIST = ['All genres', 'Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'];
 export const DEFAULT = 'All genres';
 

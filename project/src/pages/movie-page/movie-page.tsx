@@ -38,7 +38,6 @@ const MoviePage = ():JSX.Element => {
   const similarMovies = useAppSelector(selectSimilarFilms);
 
   const sortedComments = useAppSelector(selectSortedComments);
-  console.log(sortedComments)
 
   if (status.isError) {
     return (

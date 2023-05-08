@@ -11,6 +11,7 @@ interface GenresListProps {
 
 const GenresList = ({currentGenre, genresList}: GenresListProps):JSX.Element => {
   const dispatch = useAppDispatch();
+
   return (
     <ul className="catalog__genres-list">
       {

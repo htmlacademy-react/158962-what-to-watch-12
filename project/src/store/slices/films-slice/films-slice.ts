@@ -8,12 +8,14 @@ export interface IFilmSliceState {
   films: IMovie[];
   genre: string;
   status: Status;
+  remainFilmsAmount: number;
 }
 
 const initialState: IFilmSliceState = {
   films: [],
   genre: DEFAULT,
-  status: Status.Idle
+  status: Status.Idle,
+  remainFilmsAmount: 0,
 }
 
 export const fetchFilms = createAsyncThunk<IMovie[], undefined, ThunkOptions>(
@@ -46,6 +48,7 @@ export const filmsSlice = createSlice({
 
     builder.addCase(fetchFilms.fulfilled, (state, action) => {
       state.films = action.payload;
+      state.remainFilmsAmount = action.payload.length
       state.status = Status.Success;
     });
 
@@ -59,6 +62,7 @@ export const { changeGenre } = filmsSlice.actions;
 export const selectFilms= (state:RootState) => state[NameSpace.Films].films;
 export const selectStatus = (state: RootState) => state[NameSpace.Films].status;
 export const selectGenre = (state: RootState) => state[NameSpace.Films].genre;
+export const selectRemainFilmsAmount = (state : RootState) => state[NameSpace.Films].remainFilmsAmount;
 
 export const selectFilmsStatus = createSelector([selectStatus], (status) => ({
   isLoading: status === Status.Loading || status === Status.Idle,

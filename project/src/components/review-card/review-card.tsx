@@ -1,5 +1,5 @@
 import { IReview } from '../../types/review';
-import { reviewDate } from '../../utils/utils';
+import { getReviewDate } from '../../utils/utils';
 
 interface ReviewCardProps {
   review: IReview;
@@ -15,7 +15,7 @@ const ReviewCard = ({review}: ReviewCardProps):JSX.Element => {
 
         <footer className="review__details">
           <cite className="review__author">{user.name}</cite>
-          <time className="review__date" dateTime="2016-12-24">{reviewDate(date)}</time>
+          <time className="review__date" dateTime="2016-12-24">{getReviewDate(date)}</time>
         </footer>
       </blockquote>
 

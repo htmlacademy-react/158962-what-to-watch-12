@@ -3,7 +3,7 @@ import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
 import MovieList from '../../components/movie-list/movie-list';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
-import {DEFAULT, filmsAmountMain} from '../../const';
+import {DEFAULT, MAX_STEP} from '../../const';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
 import MovieButtons from '../../components/movie-buttons/movie-buttons';
 import PlayButton from '../../components/play-button/play-button';
@@ -11,7 +11,7 @@ import MyListButton from '../../components/my-list-button/my-list-button';
 import Spinner from '../../components/spinner/spinner';
 import FullPageError from '../../components/full-page-error/full-page-error';
 import { useAppSelector } from '../../hooks';
-import {selectFilms, selectFilmsStatus, selectGenre} from '../../store/slices/films-slice/films-slice';
+import {selectFilms, selectFilmsStatus, selectGenre, selectRemainFilmsAmount} from '../../store/slices/films-slice/films-slice';
 import {selectPromoFilm, selectPromoStatus} from '../../store/slices/promo-film-slice/promo-film-slice';
 
 const Main = (): JSX.Element => {
@@ -20,10 +20,14 @@ const Main = (): JSX.Element => {
   const promoFilmStatus = useAppSelector(selectPromoStatus);
   const promoMovie = useAppSelector(selectPromoFilm);
   const currentGenre = useAppSelector(selectGenre);
+  const remainFilmsAmount = useAppSelector(selectRemainFilmsAmount);
+
 
   const genresList = [...new Set (movies.map((film) => film.genre))];
 
   const filteredMovies = movies.filter((film) => currentGenre === DEFAULT ? film : film.genre === currentGenre);
+
+  const isButtonShow = filteredMovies.length > MAX_STEP && remainFilmsAmount > MAX_STEP;
 
   if (status.isError || promoFilmStatus.isError) {
     return <FullPageError />;
@@ -79,9 +83,12 @@ const Main = (): JSX.Element => {
 
           <GenresList currentGenre={currentGenre} genresList={genresList} />
 
-          <MovieList movies={filteredMovies} filmsAmount={filmsAmountMain} />
+          <MovieList movies={filteredMovies} />
 
-          <ShowMoreButton />
+          {
+            isButtonShow && <ShowMoreButton />
+          }
+
         </section>
 
         <Footer />

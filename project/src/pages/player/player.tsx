@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import {ChangeEvent, useRef, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {PlayerButtons} from '../../const';
 import {getVideoDuration} from '../../utils/utils';
@@ -56,6 +56,7 @@ const Player = ():JSX.Element => {
     }
   };
 
+
   return (
     <div className="player">
       <video
@@ -78,7 +79,12 @@ const Player = ():JSX.Element => {
         <div className="player__controls-row">
           <div className="player__time">
             <progress ref={progressRef} className="player__progress" value="0" max="100"></progress>
-            <div ref={togglerRef} className="player__toggler" style={{left: '0%'}}>Toggler</div>
+            <div ref={togglerRef}
+                 draggable="true"
+                 className="player__toggler"
+                 style={{left: '0%'}}>
+              Toggler
+            </div>
           </div>
           <div className="player__time-value">{getVideoDuration(timeCount)}</div>
         </div>

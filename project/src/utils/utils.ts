@@ -3,9 +3,9 @@ import duration from 'dayjs/plugin/duration';
 import { RATING, TimeInSeconds, HOUR } from '../const';
 dayjs.extend(duration);
 
-export const releasedYear = (date: number): string => dayjs(date).format('YYYY');
-export const reviewDate = (date: string): string => dayjs(date).format('MMMM DD, YYYY');
-export const movieDuration = (date: number): string => {
+export const getYear = (date: number): string => dayjs(date).format('YYYY');
+export const getReviewDate = (date: string): string => dayjs(date).format('MMMM DD, YYYY');
+export const getMovieDuration = (date: number): string => {
   if (date < HOUR) {
     return dayjs.duration(date, 'minutes').format('mm[m]');
   }

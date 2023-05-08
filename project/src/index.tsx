@@ -11,6 +11,7 @@ import { movies } from './mocks/movies';
 import { comments } from './mocks/comments';
 import {fetchFilms} from './store/slices/films-slice/films-slice';
 import {fetchPromoFilm} from './store/slices/promo-film-slice/promo-film-slice';
+import Wrapper from './components/container/container';
 
 store.dispatch(fetchFilms());
 store.dispatch(fetchPromoFilm());
@@ -25,7 +26,9 @@ root.render(
       <HistoryRouter history={browserHistory}>
         <ToastContainer />
         {/*<Notification />*/}
-        <App movies={movies} comments={comments} />
+        <Wrapper>
+          <App movies={movies} comments={comments} />
+        </Wrapper>
       </HistoryRouter>
     </Provider>
   </React.StrictMode>,

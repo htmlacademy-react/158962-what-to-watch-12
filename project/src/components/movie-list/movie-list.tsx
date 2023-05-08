@@ -13,14 +13,12 @@ const MovieList = ({ movies, maxAmountToShow}: FilmsListProps):JSX.Element => {
 
   return (
     <div className="catalog__films-list">
-      {
-        movies
+      {movies
           .slice(0, maxAmountToShow)
           .map((movie) => <MovieCard
             key={movie.id}
             movie={movie}
-            onActiveCardId={setActiveCardId} />)
-      }
+            onActiveCardId={setActiveCardId} />)}
     </div>
   );
 };

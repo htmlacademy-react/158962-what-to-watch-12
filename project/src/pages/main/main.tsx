@@ -14,6 +14,7 @@ import { useAppSelector } from '../../hooks';
 import {selectFilms, selectFilmsStatus, selectGenre, selectRemainFilmsAmount} from '../../store/slices/films-slice/films-slice';
 import {selectPromoFilm, selectPromoStatus} from '../../store/slices/promo-film-slice/promo-film-slice';
 import {useEffect, useState} from 'react';
+import UserBlock from '../../components/user-block/user-block';
 
 const Main = (): JSX.Element => {
   const remainFilmsAmount = useAppSelector(selectRemainFilmsAmount)
@@ -51,8 +52,6 @@ const Main = (): JSX.Element => {
     return <Spinner />;
   }
 
-
-
   const isButtonShow = filteredMovies.length > MAX_STEP && remainFilmsCount >= 0;
 
   const {
@@ -72,7 +71,9 @@ const Main = (): JSX.Element => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header className="film-card__head" />
+        <Header className="film-card__head">
+          <UserBlock />
+        </Header>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
@@ -103,9 +104,7 @@ const Main = (): JSX.Element => {
 
           <MovieList maxAmountToShow={maxAmountToShow} movies={filteredMovies} />
 
-          {
-            isButtonShow && <ShowMoreButton onButtonShowMoreClick={onButtonShowMoreClick} />
-          }
+          {isButtonShow && <ShowMoreButton onButtonShowMoreClick={onButtonShowMoreClick} />}
 
         </section>
 

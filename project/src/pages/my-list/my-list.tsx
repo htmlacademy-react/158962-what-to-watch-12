@@ -18,7 +18,7 @@ const MyList = ({movies}: MyListProps):JSX.Element => (
 
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
-      <MovieList movies={movies} filmsAmount={filmsAmountMyList} />
+      <MovieList movies={movies} />
     </section>
 
     <Footer />

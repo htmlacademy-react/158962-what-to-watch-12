@@ -25,7 +25,7 @@ root.render(
       <HistoryRouter history={browserHistory}>
         <ToastContainer />
         {/*<Notification />*/}
-        <App movies={movies} comments={comments} />
+        <App movies={movies} />
       </HistoryRouter>
     </Provider>
   </React.StrictMode>,

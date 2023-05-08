@@ -24,6 +24,7 @@ export const fetchSimilarFilms = createAsyncThunk<IMovie[], number, ThunkOptions
       const { data } = await api.get<IMovie[]>(`${APIRoute.Films}/${filmId}/similar`);
       return data;
     } catch (e) {
+      console.log(e);
       //dispatch(pushNotification({type: 'error', message: 'Cannot get nearby offers'}));
       throw e;
     }

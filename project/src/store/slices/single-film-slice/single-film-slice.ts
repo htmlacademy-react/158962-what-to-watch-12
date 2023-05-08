@@ -1,6 +1,6 @@
 import {IMovie} from '../../../types/movie';
 import {APIRoute, NameSpace, Status} from '../../../const';
-import {createAsyncThunk, createSelector, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSelector, createSlice} from '@reduxjs/toolkit';
 import {ThunkOptions} from '../../../types/state';
 import {RootState} from '../../store';
 
@@ -12,7 +12,7 @@ export interface ISingleFilmSliceState {
 const initialState: ISingleFilmSliceState = {
   film: null,
   status: Status.Idle
-}
+};
 
 export const fetchSingleFilm = createAsyncThunk<IMovie, number, ThunkOptions>(
   'data/fetchSingleFilm',
@@ -21,6 +21,7 @@ export const fetchSingleFilm = createAsyncThunk<IMovie, number, ThunkOptions>(
       const { data } = await api.get<IMovie>(`${APIRoute.Films}/${filmId}`);
       return data;
     } catch (e) {
+      console.log(e);
       //dispatch(pushNotification({type: 'error', message: 'Cannot get offer'}));
       throw e;
     }
@@ -32,7 +33,7 @@ export const singleFilmSlice = createSlice({
   initialState,
   reducers: {},
 
-  extraReducers: (builder => {
+  extraReducers: ((builder) => {
     builder.addCase(fetchSingleFilm.pending, (state) => {
       state.status = Status.Loading;
     });
@@ -48,7 +49,7 @@ export const singleFilmSlice = createSlice({
   })
 });
 
-export const selectSingleFilm= (state:RootState) => state[NameSpace.Film].film;
+export const selectSingleFilm = (state:RootState) => state[NameSpace.Film].film;
 export const selectSingleFilmStatus = (state: RootState) => state[NameSpace.Film].status;
 
 export const selectSingleStatus = createSelector([selectSingleFilmStatus], (status) => ({

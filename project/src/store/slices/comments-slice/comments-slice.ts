@@ -31,6 +31,7 @@ export const fetchComments = createAsyncThunk<IReview[], number, ThunkOptions>(
       const { data } = await api.get<IReview[]>(`${APIRoute.Comments}/${filmId}`);
       return data;
     } catch (e) {
+      console.log(e);
       //dispatch(pushNotification({type: 'error', message: 'Cannot get comments'}));
       throw e;
     }
@@ -44,6 +45,7 @@ export const postComment = createAsyncThunk<IReview[], CommentData, ThunkOptions
       const { data } = await api.post<IReview[]>(`${APIRoute.Comments}/${id}`, {rating, comment});
       return data;
     } catch (e) {
+      console.log(e);
       //dispatch(pushNotification({type: 'error', message: 'Cannot send comment'}));
       throw e;
     }

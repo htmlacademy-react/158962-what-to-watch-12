@@ -16,7 +16,7 @@ const initialState: IFilmSliceState = {
   genre: DEFAULT,
   status: Status.Idle,
   remainFilmsAmount: 0,
-}
+};
 
 export const fetchFilms = createAsyncThunk<IMovie[], undefined, ThunkOptions>(
   'data/fetchFilms',
@@ -25,7 +25,7 @@ export const fetchFilms = createAsyncThunk<IMovie[], undefined, ThunkOptions>(
       const { data } = await api.get<IMovie[]>(APIRoute.Films);
       return data;
     } catch (e) {
-      console.log(e)
+      console.log(e);
       //dispatch(pushNotification({type: 'error', message: 'Cannot get offers'}));
       throw e;
     }
@@ -41,14 +41,14 @@ export const filmsSlice = createSlice({
     },
   },
 
-  extraReducers: (builder => {
+  extraReducers: ((builder) => {
     builder.addCase(fetchFilms.pending, (state) => {
       state.status = Status.Loading;
     });
 
     builder.addCase(fetchFilms.fulfilled, (state, action) => {
       state.films = action.payload;
-      state.remainFilmsAmount = action.payload.length
+      state.remainFilmsAmount = action.payload.length;
       state.status = Status.Success;
     });
 
@@ -59,7 +59,7 @@ export const filmsSlice = createSlice({
 });
 
 export const { changeGenre } = filmsSlice.actions;
-export const selectFilms= (state:RootState) => state[NameSpace.Films].films;
+export const selectFilms = (state:RootState) => state[NameSpace.Films].films;
 export const selectStatus = (state: RootState) => state[NameSpace.Films].status;
 export const selectGenre = (state: RootState) => state[NameSpace.Films].genre;
 export const selectRemainFilmsAmount = (state : RootState) => state[NameSpace.Films].remainFilmsAmount;

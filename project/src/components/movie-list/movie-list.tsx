@@ -3,7 +3,6 @@ import {IMovie} from '../../types/movie';
 import {useState} from 'react';
 
 interface FilmsListProps {
-  filmsAmount?: number;
   movies: IMovie[];
   maxAmountToShow?: number;
 }
@@ -14,11 +13,13 @@ const MovieList = ({ movies, maxAmountToShow}: FilmsListProps):JSX.Element => {
   return (
     <div className="catalog__films-list">
       {movies
-          .slice(0, maxAmountToShow)
-          .map((movie) => <MovieCard
+        .slice(0, maxAmountToShow)
+        .map((movie) => (
+          <MovieCard
             key={movie.id}
             movie={movie}
-            onActiveCardId={setActiveCardId} />)}
+            onActiveCardId={setActiveCardId}
+          />))}
     </div>
   );
 };

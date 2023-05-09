@@ -8,7 +8,6 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import browserHistory from './browser-history';
 import { movies } from './mocks/movies';
-import { comments } from './mocks/comments';
 import {fetchFilms} from './store/slices/films-slice/films-slice';
 import {fetchPromoFilm} from './store/slices/promo-film-slice/promo-film-slice';
 

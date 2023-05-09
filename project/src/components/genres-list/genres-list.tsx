@@ -2,7 +2,7 @@ import {useAppDispatch} from '../../hooks';
 import cn from 'classnames';
 import {Link} from 'react-router-dom';
 import {changeGenre} from '../../store/slices/films-slice/films-slice';
-import {DEFAULT} from '../../const';
+import {DEFAULT, MAX_GENRES_AMOUNT} from '../../const';
 
 interface GenresListProps {
   currentGenre: string;
@@ -14,7 +14,7 @@ const GenresList = ({currentGenre, genresList}: GenresListProps):JSX.Element => 
 
   return (
     <ul className="catalog__genres-list">
-      {[DEFAULT, ...genresList].map((name) => (
+      {[DEFAULT, ...genresList].slice(0, MAX_GENRES_AMOUNT).map((name) => (
         <li key={name} className={cn('catalog__genres-item', currentGenre === name && 'catalog__genres-item--active')}>
           <Link to="/#"
             onClick={(evt) => {

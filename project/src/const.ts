@@ -1,8 +1,11 @@
+import {ILoginForm} from './types/login-form';
+
 export const filmsAmountMain = 8;
 export const filmsAmountMyList = 9;
 export const filmsAmountMoviePage = 4;
 export const HOUR = 60;
 export const MAX_STEP = 8;
+export const MAX_GENRES_AMOUNT = 9;
 export const GENRES_LIST = ['All genres', 'Comedies', 'Crime', 'Documentary', 'Dramas', 'Horror', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'];
 export const DEFAULT = 'All genres';
 
@@ -56,10 +59,10 @@ export const PASSWORD_REGEXP = /^(?=.*[0-9])(?=.*[a-z]){6,}/g;
 export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 400;
 
-export const LOGIN_FIELDS:Record<string, string> = {
-  email: 'E-mail',
-  password: 'Password',
-};
+export const LOGIN_FIELDS:ILoginForm[] = [
+  {type: 'email', name: 'user-email', value: 'Email address'},
+  {type: 'password', name: 'user-password', value: 'Password'},
+];
 
 
 export const RATING_STARS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];

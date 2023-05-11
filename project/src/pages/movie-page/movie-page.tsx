@@ -21,11 +21,13 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import {selectSingleStatus, selectSingleFilm, fetchSingleFilm} from '../../store/slices/single-film-slice/single-film-slice';
 import {selectSimilarFilms, fetchSimilarFilms} from '../../store/slices/similar-films-slice/similar-films-slice';
 import {fetchComments, selectSortedComments} from '../../store/slices/comments-slice/comments-slice';
+import {getIsAuth} from '../../store/slices/user-slice/user-slice';
 
 const MoviePage = ():JSX.Element => {
   const dispatch = useAppDispatch();
   const movieId = Number(useParams().id);
   const location = useLocation();
+  const isAuth = useAppSelector(getIsAuth);
 
   useEffect(() => {
     dispatch(fetchSingleFilm(movieId));
@@ -95,7 +97,7 @@ const MoviePage = ():JSX.Element => {
               <MovieButtons>
                 <PlayButton id={id.toString()} />
                 <MyListButton />
-                <AddReviewButton id={id} />
+                {isAuth && <AddReviewButton id={id} />}
               </MovieButtons>
             </div>
           </div>
@@ -115,7 +117,7 @@ const MoviePage = ():JSX.Element => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList movies={similarMovies} />
+          <MovieList movies={similarMovies} maxAmountToShow={filmsAmountMoviePage} />
         </section>
         <Footer />
       </div>

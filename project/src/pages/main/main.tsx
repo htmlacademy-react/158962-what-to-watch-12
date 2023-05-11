@@ -10,39 +10,34 @@ import PlayButton from '../../components/play-button/play-button';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import Spinner from '../../components/spinner/spinner';
 import FullPageError from '../../components/full-page-error/full-page-error';
-import { useAppSelector } from '../../hooks';
-import {selectFilms, selectFilmsStatus, selectGenre, selectRemainFilmsAmount} from '../../store/slices/films-slice/films-slice';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {selectFilms, selectFilmsStatus, selectGenre, selectMaxToShow, resetFilmsCount} from '../../store/slices/films-slice/films-slice';
 import {selectPromoFilm, selectPromoStatus} from '../../store/slices/promo-film-slice/promo-film-slice';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import UserBlock from '../../components/user-block/user-block';
 
 const Main = (): JSX.Element => {
-  const remainFilmsAmount = useAppSelector(selectRemainFilmsAmount);
+  const dispatch = useAppDispatch();
   const movies = useAppSelector(selectFilms);
   const status = useAppSelector(selectFilmsStatus);
   const promoFilmStatus = useAppSelector(selectPromoStatus);
   const promoMovie = useAppSelector(selectPromoFilm);
   const currentGenre = useAppSelector(selectGenre);
   const genresList = [...new Set (movies.map((film) => film.genre))];
+  const maxToShow = useAppSelector(selectMaxToShow);
 
   const filteredMovies = movies.filter((film) => currentGenre === DEFAULT ? film : film.genre === currentGenre);
 
-  const [maxAmountToShow, setMaxToShow] = useState(MAX_STEP);
-  const [remainFilmsCount, setRemainFilmsCount] = useState(remainFilmsAmount);
-
   useEffect(() => {
-    setRemainFilmsCount(remainFilmsAmount);
-  }, [remainFilmsAmount]);
+    return () => {
+      dispatch(resetFilmsCount());
+    }
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-
-  const onButtonShowMoreClick = () => {
-    setMaxToShow((prev) => prev + MAX_STEP);
-    setRemainFilmsCount((prev) => prev - maxAmountToShow);
-  };
 
   if (status.isError || promoFilmStatus.isError) {
     return <FullPageError />;
@@ -52,7 +47,8 @@ const Main = (): JSX.Element => {
     return <Spinner />;
   }
 
-  const isButtonShow = filteredMovies.length > MAX_STEP && remainFilmsCount >= 0;
+  const isButtonShow = filteredMovies.length > MAX_STEP && filteredMovies.length > maxToShow;
+
 
   const {
     name: promoName,
@@ -102,9 +98,9 @@ const Main = (): JSX.Element => {
 
           <GenresList currentGenre={currentGenre} genresList={genresList} />
 
-          <MovieList maxAmountToShow={maxAmountToShow} movies={filteredMovies} />
+          <MovieList movies={filteredMovies} />
 
-          {isButtonShow && <ShowMoreButton onButtonShowMoreClick={onButtonShowMoreClick} />}
+          {isButtonShow && <ShowMoreButton />}
 
         </section>
 

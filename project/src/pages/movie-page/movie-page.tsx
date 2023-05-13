@@ -1,6 +1,6 @@
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
-import {filmsAmountMoviePage, MovieTabsHashes} from '../../const';
+import {similarMoviesAmount, MovieTabsHashes} from '../../const';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
@@ -53,7 +53,7 @@ const MoviePage = ():JSX.Element => {
     );
   }
 
-  const {name, backgroundImage, genre, released, posterImage, id} = movie;
+  const {name, backgroundImage, genre, released, posterImage, id, backgroundColor} = movie;
 
 
   const renderTab = () => {
@@ -74,7 +74,7 @@ const MoviePage = ():JSX.Element => {
 
   return (
     <>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{background: backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={backgroundImage} alt={name} />
@@ -96,7 +96,7 @@ const MoviePage = ():JSX.Element => {
 
               <MovieButtons>
                 <PlayButton id={id.toString()} />
-                <MyListButton />
+                <MyListButton movie={movie} />
                 {isAuth && <AddReviewButton id={id} />}
               </MovieButtons>
             </div>
@@ -117,7 +117,7 @@ const MoviePage = ():JSX.Element => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList movies={similarMovies} maxAmountToShow={filmsAmountMoviePage} />
+          <MovieList movies={similarMovies} maxAmountToShow={similarMoviesAmount} />
         </section>
         <Footer />
       </div>

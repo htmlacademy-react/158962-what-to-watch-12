@@ -38,8 +38,9 @@ const ReviewForm = ({currentId}: ReviewFormProps):JSX.Element => {
 
   return (
     <form action="#"
-          onSubmit={handleSubmit}
-          className="add-review__form">
+      onSubmit={handleSubmit}
+      className="add-review__form"
+    >
       <div className="rating">
         <div className="rating__stars">
           {
@@ -78,8 +79,10 @@ const ReviewForm = ({currentId}: ReviewFormProps):JSX.Element => {
         </textarea>
         <div className="add-review__submit">
           <button className="add-review__btn"
-                  disabled={validForm}
-                  type="submit">Post</button>
+            disabled={validForm}
+            type="submit"
+          >Post
+          </button>
         </div>
 
       </div>

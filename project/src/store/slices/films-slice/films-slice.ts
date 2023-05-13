@@ -3,12 +3,13 @@ import {APIRoute, DEFAULT, MAX_STEP, NameSpace, Status} from '../../../const';
 import {createAsyncThunk, createSelector, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ThunkOptions} from '../../../types/state';
 import {RootState} from '../../store';
+import { pushNotification } from '../notification-slice/notification-slice';
 
 export interface IFilmSliceState {
   films: IMovie[];
   genre: string;
   status: Status;
-  maxToShow: number,
+  maxToShow: number;
 }
 
 const initialState: IFilmSliceState = {
@@ -25,8 +26,7 @@ export const fetchFilms = createAsyncThunk<IMovie[], undefined, ThunkOptions>(
       const { data } = await api.get<IMovie[]>(APIRoute.Films);
       return data;
     } catch (e) {
-      console.log(e);
-      //dispatch(pushNotification({type: 'error', message: 'Cannot get offers'}));
+      dispatch(pushNotification({type: 'error', message: 'Cannot get movies'}));
       throw e;
     }
   }

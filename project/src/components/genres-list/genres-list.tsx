@@ -12,9 +12,9 @@ interface GenresListProps {
 const GenresList = ({currentGenre, genresList}: GenresListProps):JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const handleGenreLinkClick = (link: string, currentGenre: string): boolean | void => {
-    if ( link === currentGenre) {
-      return false;
+  const handleGenreLinkClick = (link: string, genre: string): void => {
+    if ( link === genre) {
+      return;
     }
     dispatch(changeGenre(link));
     dispatch(resetFilmsCount());
@@ -22,22 +22,18 @@ const GenresList = ({currentGenre, genresList}: GenresListProps):JSX.Element => 
 
   return (
     <ul className="catalog__genres-list">
-      {[DEFAULT, ...genresList].slice(0, MAX_GENRES_AMOUNT).map((name) => {
-
-        return (
-          <li key={name} className={cn('catalog__genres-item', currentGenre === name && 'catalog__genres-item--active')}>
-            <Link to="/#"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    handleGenreLinkClick(name, currentGenre);
-                    }
-                  }
-                  className="catalog__genres-link"
-            >{name}
-            </Link>
-          </li>
-        )
-      })}
+      {[DEFAULT, ...genresList].slice(0, MAX_GENRES_AMOUNT).map((name) => (
+        <li key={name} className={cn('catalog__genres-item', currentGenre === name && 'catalog__genres-item--active')}>
+          <Link to="/#"
+            onClick={(evt) => {
+              evt.preventDefault();
+              handleGenreLinkClick(name, currentGenre);
+            }}
+            className="catalog__genres-link"
+          >{name}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 };

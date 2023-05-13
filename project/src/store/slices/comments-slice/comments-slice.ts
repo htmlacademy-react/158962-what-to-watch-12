@@ -4,8 +4,8 @@ import { IReview } from '../../../types/review';
 import { APIRoute, NameSpace, Status } from '../../../const';
 import dayjs from 'dayjs';
 import { ThunkOptions } from '../../../types/state';
-//import { pushNotification } from '../notification-slice/notification-slice';
 import {IMovie} from '../../../types/movie';
+import {pushNotification} from '../notification-slice/notification-slice';
 
 export type CommentsSliceState = {
   comments: IReview[];
@@ -31,8 +31,7 @@ export const fetchComments = createAsyncThunk<IReview[], number, ThunkOptions>(
       const { data } = await api.get<IReview[]>(`${APIRoute.Comments}/${filmId}`);
       return data;
     } catch (e) {
-      console.log(e);
-      //dispatch(pushNotification({type: 'error', message: 'Cannot get comments'}));
+      dispatch(pushNotification({type: 'error', message: 'Cannot get comments'}));
       throw e;
     }
   }
@@ -45,8 +44,7 @@ export const postComment = createAsyncThunk<IReview[], CommentData, ThunkOptions
       const { data } = await api.post<IReview[]>(`${APIRoute.Comments}/${id}`, {rating, comment});
       return data;
     } catch (e) {
-      console.log(e);
-      //dispatch(pushNotification({type: 'error', message: 'Cannot send comment'}));
+      dispatch(pushNotification({type: 'error', message: 'Cannot send comment'}));
       throw e;
     }
   }

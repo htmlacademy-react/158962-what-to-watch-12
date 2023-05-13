@@ -9,12 +9,12 @@ const ShowMoreButton = ():JSX.Element => {
   return (
     <div className="catalog__more">
       <button className="catalog__button"
-              onClick={handleShowMoreButtonClick}
-              type="button"
+        onClick={handleShowMoreButtonClick}
+        type="button"
       >Show more
       </button>
     </div>
-  )
+  );
 };
 
 export default ShowMoreButton;

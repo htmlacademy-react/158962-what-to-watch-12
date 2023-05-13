@@ -3,8 +3,7 @@ import {RootState} from '../../store';
 import {IMovie} from '../../../types/movie';
 import {APIRoute, NameSpace, Status} from '../../../const';
 import {ThunkOptions} from '../../../types/state';
-//import {pushNotification} from '../notification-slice/notification-slice';
-//import {addFavoriteOffer} from '../favorites-slice/favorites-slice';
+import {pushNotification} from '../notification-slice/notification-slice';
 
 export type ISimilarSliceState = {
   films: IMovie[];
@@ -24,8 +23,7 @@ export const fetchSimilarFilms = createAsyncThunk<IMovie[], number, ThunkOptions
       const { data } = await api.get<IMovie[]>(`${APIRoute.Films}/${filmId}/similar`);
       return data;
     } catch (e) {
-      console.log(e);
-      //dispatch(pushNotification({type: 'error', message: 'Cannot get nearby offers'}));
+      dispatch(pushNotification({type: 'error', message: 'Cannot get similar movies'}));
       throw e;
     }
   }
@@ -49,14 +47,6 @@ export const similarFilmsSlice = createSlice( {
     builder.addCase(fetchSimilarFilms.rejected, (state) => {
       state.status = Status.Error;
     });
-
-    /*builder.addCase(addFavoriteOffer.fulfilled, (state, action) => {
-      state.offers.forEach((offer) => {
-        if(offer.id === action.payload.id) {
-          offer.isFavorite = action.payload.isFavorite;
-        }
-      });
-    });*/
   }
 });
 

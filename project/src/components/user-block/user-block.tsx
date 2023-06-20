@@ -41,7 +41,7 @@ const UserBlock = ():JSX.Element => {
           </Link>}
       </li>
     </ul>
-  )
+  );
 };
 
 export default UserBlock;

@@ -7,9 +7,10 @@ import HistoryRouter from '../src/components/history-route/history-route';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import browserHistory from './browser-history';
-import { movies } from './mocks/movies';
 import {fetchFilms} from './store/slices/films-slice/films-slice';
 import {fetchPromoFilm} from './store/slices/promo-film-slice/promo-film-slice';
+import Notification from './components/notification/notification';
+
 
 store.dispatch(fetchFilms());
 store.dispatch(fetchPromoFilm());
@@ -23,8 +24,8 @@ root.render(
     <Provider store={store}>
       <HistoryRouter history={browserHistory}>
         <ToastContainer />
-        {/*<Notification />*/}
-        <App movies={movies} />
+        <Notification />
+        <App />
       </HistoryRouter>
     </Provider>
   </React.StrictMode>,

@@ -5,7 +5,7 @@ import { EMAIL_REGEXP, PASSWORD_REGEXP, LOGIN_FIELDS } from '../../const';
 import { loginAction } from '../../store/slices/user-slice/user-slice';
 import cn from 'classnames';
 
-interface Field  {
+interface Field {
   value: string;
   regex: RegExp;
   error: boolean;
@@ -58,39 +58,40 @@ const LoginForm = ():JSX.Element => {
 
   return (
     <form action=""
-          onSubmit={handleSubmit}
-          className="sign-in__form">
+      onSubmit={handleSubmit}
+      className="sign-in__form"
+    >
       {isFieldsGroupValid &&
         <SignInMessage>
           {formData.email.error && <p>Please enter a valid email address</p>}
           {formData.password.error && <p>We can’t recognize this email <br /> and password combination. Please try again.</p>}
-      </SignInMessage>}
+        </SignInMessage>}
 
       <div className="sign-in__fields">
-        {LOGIN_FIELDS.map(({name, type, value}) => {
-          return (
-            <div key={name} className={cn('sign-in__field', formData[type].error && 'sign-in__field--error')}>
-              <input className="sign-in__input"
-                     type={type}
-                     placeholder={value}
-                     name={name}
-                     onChange={handleInputChange}
-                     id={name}
-                     required
-              />
-              <label className="sign-in__label visually-hidden" htmlFor={name}>{value}</label>
-            </div>
-          )
-        })}
+        {LOGIN_FIELDS.map(({name, type, value}) => (
+          <div key={name} className={cn('sign-in__field', formData[type].error && 'sign-in__field--error')}>
+            <input className="sign-in__input"
+              type={type}
+              placeholder={value}
+              name={name}
+              onChange={handleInputChange}
+              id={name}
+              required
+            />
+            <label className="sign-in__label visually-hidden" htmlFor={name}>{value}</label>
+          </div>
+        ))}
 
       </div>
       <div className="sign-in__submit">
         <button className="sign-in__btn"
-                disabled={isFieldsGroupValid}
-                type="submit">Sign in</button>
+          disabled={isFieldsGroupValid}
+          type="submit"
+        >Sign in
+        </button>
       </div>
     </form>
-  )
+  );
 };
 
 export default LoginForm;

@@ -3,6 +3,8 @@ import {APIRoute, DEFAULT, NameSpace, Status} from '../../../const';
 import {createAsyncThunk, createSelector, createSlice,} from '@reduxjs/toolkit';
 import {ThunkOptions} from '../../../types/state';
 import {RootState} from '../../store';
+import {addFavoriteOffer} from '../favorites-slice/favorites-slice';
+import { pushNotification } from '../notification-slice/notification-slice';
 
 export interface IPromoFilmSliceState {
   promoFilm: IMovie | null;
@@ -23,8 +25,7 @@ export const fetchPromoFilm = createAsyncThunk<IMovie, undefined, ThunkOptions>(
       const { data } = await api.get<IMovie>(APIRoute.Promo);
       return data;
     } catch (e) {
-      console.log(e);
-      //dispatch(pushNotification({type: 'error', message: 'Cannot get offers'}));
+      dispatch(pushNotification({type: 'error', message: 'Cannot get promo movie'}));
       throw e;
     }
   }
@@ -47,6 +48,12 @@ export const promoFilmSlice = createSlice({
 
     builder.addCase(fetchPromoFilm.rejected, (state) => {
       state.status = Status.Error;
+    });
+
+    builder.addCase(addFavoriteOffer.fulfilled, (state, action) => {
+      if(state.promoFilm?.id === action.payload.id) {
+        state.promoFilm.isFavorite = action.payload.isFavorite;
+      }
     });
   })
 });

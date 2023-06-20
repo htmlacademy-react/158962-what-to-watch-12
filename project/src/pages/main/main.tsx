@@ -11,7 +11,7 @@ import MyListButton from '../../components/my-list-button/my-list-button';
 import Spinner from '../../components/spinner/spinner';
 import FullPageError from '../../components/full-page-error/full-page-error';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {selectFilms, selectFilmsStatus, selectGenre, selectMaxToShow, resetFilmsCount} from '../../store/slices/films-slice/films-slice';
+import {selectFilms, selectFilmsStatus, selectGenre, selectMaxToShow, resetFilmsCount, changeGenre} from '../../store/slices/films-slice/films-slice';
 import {selectPromoFilm, selectPromoStatus} from '../../store/slices/promo-film-slice/promo-film-slice';
 import {useEffect} from 'react';
 import UserBlock from '../../components/user-block/user-block';
@@ -28,15 +28,14 @@ const Main = (): JSX.Element => {
 
   const filteredMovies = movies.filter((film) => currentGenre === DEFAULT ? film : film.genre === currentGenre);
 
-  useEffect(() => {
-    return () => {
-      dispatch(resetFilmsCount());
-    }
+  useEffect(() => () => {
+    dispatch(resetFilmsCount());
+    dispatch(changeGenre(DEFAULT));
   }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]);
+  }, []);
 
 
   if (status.isError || promoFilmStatus.isError) {
@@ -85,7 +84,7 @@ const Main = (): JSX.Element => {
 
               <MovieButtons>
                 <PlayButton id={promoId.toString()} />
-                <MyListButton />
+                <MyListButton movie={promoMovie} />
               </MovieButtons>
             </div>
           </div>
@@ -98,7 +97,7 @@ const Main = (): JSX.Element => {
 
           <GenresList currentGenre={currentGenre} genresList={genresList} />
 
-          <MovieList movies={filteredMovies} />
+          <MovieList movies={filteredMovies} maxAmountToShow={maxToShow} />
 
           {isButtonShow && <ShowMoreButton />}
 

@@ -6,8 +6,8 @@ import {dropToken, saveToken} from '../../../services/token';
 import {redirectToRoute} from '../../action';
 import {toast} from 'react-toastify';
 import {ThunkOptions} from '../../../types/state';
-//import {pushNotification} from '../notification-slice/notification-slice';
-//import {fetchFavorites} from '../favorites-slice/favorites-slice';
+import {pushNotification} from '../notification-slice/notification-slice';
+import {fetchFavorites} from '../favorites-slice/favorites-slice';
 
 
 export type UserProcess = {
@@ -33,16 +33,15 @@ const initialState: UserProcess = {
   avatar: '',
 };
 
-// dont need status here
 export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkOptions>(
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
       const { data } = await api.get<UserData>(APIRoute.Login);
-      //dispatch(fetchFavorites());
+      dispatch(fetchFavorites());
       return data;
     } catch (e) {
-      //dispatch(pushNotification({type: 'info', message: 'Get more features after authorization'}));
+      dispatch(pushNotification({type: 'info', message: 'Get more features after authorization'}));
       throw e;
     }
   },
@@ -55,10 +54,10 @@ export const loginAction = createAsyncThunk<UserData, AuthData, ThunkOptions>(
       const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(data.token);
       dispatch(redirectToRoute(AppRoute.Root));
-      //dispatch(fetchFavorites());
+      dispatch(fetchFavorites());
       return data;
     } catch (e) {
-      //dispatch(pushNotification({type: 'error', message: 'Failed login'}));
+      dispatch(pushNotification({type: 'error', message: 'Failed login'}));
       throw e;
     }
   },

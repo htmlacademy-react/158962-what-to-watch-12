@@ -81,7 +81,7 @@ const ReviewForm = ({currentId}: ReviewFormProps):JSX.Element => {
           <button className="add-review__btn"
             disabled={validForm}
             type="submit"
-          >Post
+          >{status.isLoading ? '...Loading' : 'Post'}
           </button>
         </div>
 

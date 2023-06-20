@@ -13,7 +13,6 @@ export enum AppRoute {
   MyList = '/mylist',
   AddReview = '/films/:id/review',
   Player = '/player/:id',
-  Genre = '/:genre',
   Tabs = '/films/:id/:tabhash',
 }
 

@@ -1,6 +1,6 @@
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
-import {similarMoviesAmount, MovieTabsHashes} from '../../const';
+import {SIMILAR_MOVIES_AMOUNT, MovieTabsHashes} from '../../const';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
@@ -117,7 +117,7 @@ const MoviePage = ():JSX.Element => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList movies={similarMovies} maxAmountToShow={similarMoviesAmount} />
+          <MovieList movies={similarMovies} maxAmountToShow={SIMILAR_MOVIES_AMOUNT} />
         </section>
         <Footer />
       </div>

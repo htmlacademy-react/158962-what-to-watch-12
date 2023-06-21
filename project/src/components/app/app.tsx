@@ -1,17 +1,18 @@
 import Main from '../../pages/main/main';
 import {Route, Routes} from 'react-router-dom';
-import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import Login from '../../pages/login/login';
-import MyList from '../../pages/my-list/my-list';
-import AddReview from '../../pages/add-review/add-review';
-import MoviePage from '../../pages/movie-page/movie-page';
-import Player from '../../pages/player/player';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {checkAuthAction, selectAuthorizationStatus} from '../../store/slices/user-slice/user-slice';
 import {useEffect, Suspense, lazy} from 'react';
 import Spinner from '../spinner/spinner';
+
+const AddReview = lazy(() => import('../../pages/add-review/add-review'));
+const Login = lazy(() => import('../../pages/login/login'));
+const NotFound = lazy(() => import('../../pages/not-found/not-found'));
+const Player = lazy(() => import('../../pages/player/player'));
+const MoviePage = lazy(() => import('../../pages/movie-page/movie-page'));
+const MyList = lazy(() => import('../../pages/my-list/my-list'));
 
 const App = (): JSX.Element => {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
@@ -39,7 +40,6 @@ const App = (): JSX.Element => {
           </PrivateRoute>
         }
         />
-
         <Route path={AppRoute.AddReview} element={
           <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
             <AddReview />

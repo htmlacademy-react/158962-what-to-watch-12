@@ -1,7 +1,7 @@
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {getNotifications, clearNotification} from '../../store/slices/notification-slice/notification-slice';
 import {toast, ToastOptions} from 'react-toastify';
-import {INotification as INotification} from '../../types/notification';
+import {INotification} from '../../types/notification';
 
 function Notification(): JSX.Element {
   const notifications = useAppSelector(getNotifications);

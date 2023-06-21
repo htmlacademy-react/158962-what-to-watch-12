@@ -1,6 +1,6 @@
 import {ILoginForm} from './types/login-form';
 
-export const similarMoviesAmount = 4;
+export const SIMILAR_MOVIES_AMOUNT = 4;
 export const HOUR = 60;
 export const MAX_STEP = 8;
 export const MAX_GENRES_AMOUNT = 9;

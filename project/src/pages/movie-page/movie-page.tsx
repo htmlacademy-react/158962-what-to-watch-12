@@ -1,6 +1,6 @@
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
-import {SIMILAR_MOVIES_AMOUNT, MovieTabsHashes} from '../../const';
+import {SIMILAR_MOVIES_AMOUNT, MovieTabsHashes, AppRoute} from '../../const';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import MovieCardPoster from '../../components/movie-card-poster/movie-card-poster';
@@ -22,6 +22,7 @@ import {selectSingleStatus, selectSingleFilm, fetchSingleFilm} from '../../store
 import {selectSimilarFilms, fetchSimilarFilms} from '../../store/slices/similar-films-slice/similar-films-slice';
 import {fetchComments, selectSortedComments} from '../../store/slices/comments-slice/comments-slice';
 import {getIsAuth} from '../../store/slices/user-slice/user-slice';
+import {redirectToRoute} from '../../store/action';
 
 const MoviePage = ():JSX.Element => {
   const dispatch = useAppDispatch();
@@ -29,15 +30,22 @@ const MoviePage = ():JSX.Element => {
   const location = useLocation();
   const isAuth = useAppSelector(getIsAuth);
 
+  const status = useAppSelector(selectSingleStatus);
+  const movie = useAppSelector(selectSingleFilm);
+  const similarMovies = useAppSelector(selectSimilarFilms);
+
+
   useEffect(() => {
     dispatch(fetchSingleFilm(movieId));
     dispatch(fetchSimilarFilms(movieId));
     dispatch(fetchComments(movieId));
   }, [movieId, dispatch]);
 
-  const status = useAppSelector(selectSingleStatus);
-  const movie = useAppSelector(selectSingleFilm);
-  const similarMovies = useAppSelector(selectSimilarFilms);
+  useEffect(() => {
+    if (!status.isLoading && !movie) {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+    }
+  });
 
   const sortedComments = useAppSelector(selectSortedComments);
 

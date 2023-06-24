@@ -3,11 +3,11 @@ import { Link, generatePath, useLocation } from 'react-router-dom';
 import { IMovie } from '../../types/movie';
 import cn from 'classnames';
 
-interface MoviePageTabs {
+interface MoviePageTabsProps {
   movie: IMovie;
 }
 
-const MoviePageTabs = ({movie}: MoviePageTabs): JSX.Element => {
+const MoviePageTabs = ({movie}: MoviePageTabsProps): JSX.Element => {
   const { id } = movie;
   const location = useLocation();
 

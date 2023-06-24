@@ -1,6 +1,6 @@
 import { useRef, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {PlayerButtons} from '../../const';
+import {AppRoute, PlayerButtons} from '../../const';
 import {getVideoDuration} from '../../utils/utils';
 import {useAppSelector} from '../../hooks';
 import {selectFilms} from '../../store/slices/films-slice/films-slice';
@@ -39,7 +39,7 @@ const Player = ():JSX.Element => {
     videoRef.current?.requestFullscreen();
   };
 
-  const handleCloseButton = () => navigate(-1);
+  const handleCloseButton = () => navigate(AppRoute.Root);
 
   const handleTimeUpdate = () => {
     if (!videoRef.current || !togglerRef.current || !progressRef.current) {
@@ -100,7 +100,7 @@ const Player = ():JSX.Element => {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{currentMovie?.name}</div>
 
           <button type="button"
             onClick={handleFullScreenButton}

@@ -13,7 +13,7 @@ import FullPageError from '../../components/full-page-error/full-page-error';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {selectFilms, selectFilmsStatus, selectGenre, selectMaxToShow, resetFilmsCount, changeGenre} from '../../store/slices/films-slice/films-slice';
 import {selectPromoFilm, selectPromoStatus} from '../../store/slices/promo-film-slice/promo-film-slice';
-import {useEffect} from 'react';
+import {useEffect, useMemo} from 'react';
 import UserBlock from '../../components/user-block/user-block';
 
 const Main = (): JSX.Element => {
@@ -23,7 +23,6 @@ const Main = (): JSX.Element => {
   const promoFilmStatus = useAppSelector(selectPromoStatus);
   const promoMovie = useAppSelector(selectPromoFilm);
   const currentGenre = useAppSelector(selectGenre);
-  const genresList = [...new Set (movies.map((film) => film.genre))];
   const maxToShow = useAppSelector(selectMaxToShow);
 
   const filteredMovies = movies.filter((film) => currentGenre === DEFAULT ? film : film.genre === currentGenre);
@@ -37,6 +36,9 @@ const Main = (): JSX.Element => {
     window.scrollTo(0, 0);
   }, []);
 
+
+  const genresList = useMemo(() => [...new Set (movies.map((film) => film.genre))], [movies]);
+  const genres = useMemo(() => genresList, [genresList]);
 
   if (status.isError || promoFilmStatus.isError) {
     return <FullPageError />;
@@ -95,7 +97,7 @@ const Main = (): JSX.Element => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList currentGenre={currentGenre} genresList={genresList} />
+          <GenresList currentGenre={currentGenre} genresList={genres} />
 
           <MovieList movies={filteredMovies} maxAmountToShow={maxToShow} />
 

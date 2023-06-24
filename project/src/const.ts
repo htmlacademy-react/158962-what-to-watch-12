@@ -14,6 +14,7 @@ export enum AppRoute {
   AddReview = '/films/:id/review',
   Player = '/player/:id',
   Tabs = '/films/:id/:tabhash',
+  NotFound = '/404'
 }
 
 export enum AuthorizationStatus {

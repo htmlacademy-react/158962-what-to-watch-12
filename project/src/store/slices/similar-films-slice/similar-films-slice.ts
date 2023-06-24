@@ -50,7 +50,5 @@ export const similarFilmsSlice = createSlice( {
   }
 });
 
-
-export const selectSimilarFilmsStatus = (state: RootState) => state[NameSpace.SimilarFilms].status;
 export const selectSimilarFilms = (state: RootState) => state[NameSpace.SimilarFilms].films;
 export default similarFilmsSlice.reducer;
